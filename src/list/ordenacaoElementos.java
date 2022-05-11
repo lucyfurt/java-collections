@@ -2,6 +2,7 @@ package list;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 public class ordenacaoElementos {
@@ -16,8 +17,14 @@ public class ordenacaoElementos {
         //ordem aleatoria
         Collections.shuffle(meusGatos);
         System.out.println(meusGatos);
-        //ordem natural
+        //ordem natural (nome)
         Collections.sort(meusGatos);
+        System.out.println(meusGatos);
+        //comparar por idade
+        meusGatos.sort(new comparatorIdade());
+        System.out.println(meusGatos);
+        //comparar por cor
+        meusGatos.sort(new comparatorCor());
         System.out.println(meusGatos);
     }
 
@@ -57,6 +64,20 @@ public class ordenacaoElementos {
         @Override
         public int compareTo(Gato gato) {
             return this.getNome().compareToIgnoreCase(gato.getNome());
+        }
+    }
+    static class comparatorIdade implements Comparator<Gato>{
+
+        @Override
+        public int compare(Gato g1, Gato g2) {
+            return Integer.compare(g1.getIdade(), g2.getIdade());
+        }
+    }
+    static class comparatorCor implements Comparator<Gato>{
+
+        @Override
+        public int compare(Gato g1, Gato g2) {
+            return g1.getCor().compareToIgnoreCase(g2.getCor());
         }
     }
 }
